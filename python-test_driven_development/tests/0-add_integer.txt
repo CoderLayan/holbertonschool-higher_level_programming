@@ -32,3 +32,21 @@ TypeError: a must be an integer
 
 >>> add_integer(-1.5, -2.5)
 -3
+
+>>> add_integer(float('nan'))
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
+
+>>> add_integer(float('inf'))
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
+
+>>> add_integer(float('-inf'))
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
+
+>>> add_integer(1.0e100, 2.0e100)
+200000000000000015189301421350183344529984
