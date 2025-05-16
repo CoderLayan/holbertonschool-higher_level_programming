@@ -17,12 +17,18 @@ def matrix_divided(matrix, div):
     Returns:
         A new matrix with all elements divided by div, rounded to 2 decimal places.
     """
+    # Check for missing arguments
+    if matrix is None or div is None:
+        raise TypeError("matrix_divided() missing required positional arguments")
+
     # Check if matrix is a list of lists of numbers
-    if not isinstance(matrix, list) or matrix == []:
+    if not isinstance(matrix, list) or not matrix:
         raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
     
     for row in matrix:
         if not isinstance(row, list):
+            raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
+        if not row:  # Handle empty rows
             raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
         for num in row:
             if not isinstance(num, (int, float)):
@@ -38,9 +44,11 @@ def matrix_divided(matrix, div):
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
 
-    # Check if div is zero
+    # Check for division by zero or infinity
     if div == 0:
         raise ZeroDivisionError("division by zero")
+    if div == float('inf') or div == float('-inf'):
+        return [[0.0 for _ in row] for row in matrix]
 
     # Divide each element by div and round to 2 decimal places
     return [[round(num / div, 2) for num in row] for row in matrix]
