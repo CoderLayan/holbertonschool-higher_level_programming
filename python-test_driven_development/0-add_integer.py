@@ -25,4 +25,13 @@ def add_integer(a, b=98):
     if isinstance(b, float) and (b != b or abs(b) == float('inf')):
         raise ValueError("cannot convert float NaN to integer")
     
-    return int(a) + int(b)
+    # Handle very large floats by converting to int first
+    try:
+        a_int = int(a)
+        b_int = int(b)
+    except OverflowError:
+        # For very large numbers, we'll let Python handle the conversion
+        a_int = int(a)
+        b_int = int(b)
+    
+    return a_int + b_int
