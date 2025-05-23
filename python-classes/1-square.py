@@ -1,22 +1,17 @@
 #!/usr/bin/python3
-"""Defines a Square class with private size attribute."""
+"""
+Module 1-square
+Defines a Square class with a private size attribute.
+"""
+
 
 class Square:
-    """Represents a square with private size attribute.
+    """Represents a square with a private instance attribute 'size'."""
 
-    This class demonstrates encapsulation by making the size attribute private,
-    which prevents direct modification from outside the class. Future tasks will
-    add methods to safely access and modify this attribute.
-
-    Attributes:
-        __size (int): The size of the square (private)
-    """
-    
     def __init__(self, size):
-        """Initializes a new Square instance.
-
+        """Initializes a new square with a given size.
+        
         Args:
-            size (int): The size of the new square.
-                       Currently no type or value verification is performed.
+            size (int): The size of the square.
         """
         self.__size = size
