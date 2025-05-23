@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Module 3-rectangle
-Defines a Rectangle class with width, height, area, perimeter, and string representation.
+Defines a Rectangle class with attributes, methods, and string representation.
 """
 
 
@@ -84,4 +84,6 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return ""
-        return "\n".join(["#" * self.__width for _ in range(self.__height)])
+        return "\n".join(
+            ["#" * self.__width for _ in range(self.__height)]
+        )
