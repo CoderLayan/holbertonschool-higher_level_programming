@@ -10,7 +10,7 @@ class Rectangle:
 
     def __init__(self, width=0, height=0):
         """Initializes a new Rectangle with width and height.
-        
+
         Args:
             width (int): Width of the rectangle.
             height (int): Height of the rectangle.
@@ -26,7 +26,7 @@ class Rectangle:
     @width.setter
     def width(self, value):
         """Sets the width while enforcing validation.
-        
+
         Args:
             value (int): New width value.
 
@@ -48,7 +48,7 @@ class Rectangle:
     @height.setter
     def height(self, value):
         """Sets the height while enforcing validation.
-        
+
         Args:
             value (int): New height value.
 
@@ -68,7 +68,7 @@ class Rectangle:
 
     def perimeter(self):
         """Calculates and returns the rectangle's perimeter.
-        
+
         Returns:
             If width or height is 0, returns 0. Otherwise, returns perimeter.
         """
