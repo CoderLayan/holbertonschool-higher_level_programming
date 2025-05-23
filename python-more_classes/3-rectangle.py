@@ -1,5 +1,10 @@
 #!/usr/bin/python3
-"""Defines a class Rectangle with width and height, including string representation."""
+"""
+Module 3-rectangle
+Defines a Rectangle class with attributes, methods, 
+and string representation.
+"""
+
 
 
 class Rectangle:
