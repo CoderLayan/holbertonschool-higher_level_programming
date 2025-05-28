@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """Module containing improved BaseGeometry class with area method."""
 
 
@@ -7,7 +6,7 @@ class BaseGeometry:
 
     def area(self):
         """Calculate the area (not implemented).
-        
+
         Raises:
             Exception: Always raises with message 'area() is not implemented'
         """
