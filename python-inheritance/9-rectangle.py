@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """better rectangle"""
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
@@ -32,4 +31,3 @@ class Rectangle(BaseGeometry):
         Return: string format
         """
         return "[Rectangle] {}/{}".format(self.__width, self.__height)
-
