@@ -1,20 +1,17 @@
-# Python - Inheritance
+# Project Title: Python Geometry & Validation
 
-## Task 0: Lookup
+## Description
+This project includes various Python modules and classes related to geometry operations, validation, and object comparison. The implementation follows strict coding standards and documentation guidelines.
 
-Write a function that returns the list of available attributes and methods of an object.
-
-### Requirements:
-- Prototype: `def lookup(obj):`
-- Returns a list object
-- You are not allowed to import any module
-
-### Example Usage:
-```python
-lookup = __import__('0-lookup').lookup
-
-class MyClass1(object):
-    pass
-
-print(lookup(MyClass1))
-# Output will show all default Python object attributes/methods
+## Table of Contents
+1. Lookup Function
+2. My List Class
+3. Object Comparison
+4. Class Inheritance Checks
+5. Subclass Validations
+6. Geometry Module
+7. Geometry Enhancements
+8. Integer Validation
+9. Rectangle Class
+10. Full Rectangle Implementation
+11. Square Implementation:
