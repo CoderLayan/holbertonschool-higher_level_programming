@@ -1,0 +1,33 @@
+# Test 1: Creating a BaseGeometry instance
+>>> bg = BaseGeometry()
+>>> isinstance(bg, BaseGeometry)
+True
+
+# Test 2: Calling area() method (should raise an exception)
+>>> bg.area()
+Traceback (most recent call last):
+    ...
+Exception: area() is not implemented
+
+# Test 3: Valid integer values
+>>> bg.integer_validator("my_int", 12)
+
+>>> bg.integer_validator("width", 89)
+
+# Test 4: Invalid type (should raise TypeError)
+>>> bg.integer_validator("name", "John")
+Traceback (most recent call last):
+    ...
+TypeError: name must be an integer
+
+# Test 5: Invalid value (zero, should raise ValueError)
+>>> bg.integer_validator("age", 0)
+Traceback (most recent call last):
+    ...
+ValueError: age must be greater than 0
+
+# Test 6: Invalid value (negative, should raise ValueError)
+>>> bg.integer_validator("distance", -4)
+Traceback (most recent call last):
+    ...
+ValueError: distance must be greater than 0
