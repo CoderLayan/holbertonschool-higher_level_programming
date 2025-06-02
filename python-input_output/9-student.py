@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""Defines a student class with JSON serialization"""
+
+
 class Student:
     """Defines a student by first_name, last_name, and age"""
     
