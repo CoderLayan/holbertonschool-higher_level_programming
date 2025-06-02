@@ -1,28 +1,32 @@
+
 #!/usr/bin/python3
-"""Defines a Student class with filtered JSON serialization"""
+"""Student to JSON"""
 
 
 class Student:
-    """Defines a student by first_name, last_name, and age"""
-
+    """Student class
+    """
     def __init__(self, first_name, last_name, age):
-        """Initializes the student instance"""
+        """the given instantiation for student
+        Args:
+            first_name: first name of the student
+            last_name: last name of the student
+            age: age of the student
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieves a dictionary representation of a Student instance
-        If attrs is a list of strings, only includes those attributes
+        """Student class to JSON
+        Args:
+            attrs: list of attributes
+        Returns:
+            dict: dictionary representation of a simple data structure
         """
-        if (isinstance(attrs, list) and \
-                all(isinstance(attr, str) for attr in attrs):
-            return {
-                attr: getattr(self, attr)
-                for attr in attrs if hasattr(self, attr)
-            }
-        return {
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'age': self.age
-        }
+        if attrs is None:
+            return self.__dict__
+        else:
+            return {key: value for key, value
+                    in self.__dict__.items() if key in attrs}
+
