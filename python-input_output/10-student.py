@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """Student to JSON"""
 
@@ -29,4 +28,3 @@ class Student:
         else:
             return {key: value for key, value
                     in self.__dict__.items() if key in attrs}
-
