@@ -1,41 +1,48 @@
 #!/usr/bin/python3
 """
-Takes in an argument and displays all values in the states table
-where name matches the argument (safe from SQL injection)
+Script that filters states by user input from hbtn_0e_0_usa database.
+Returns exact match for state name with proper formatting.
 """
 
-import MySQLdb
 import sys
+import MySQLdb
+
 
 if __name__ == "__main__":
     # Get command line arguments
+    if len(sys.argv) != 5:
+        sys.exit(1)
+
     username = sys.argv[1]
     password = sys.argv[2]
     db_name = sys.argv[3]
     state_name = sys.argv[4]
 
-    # Connect to MySQL server
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=username,
-        passwd=password,
-        db=db_name
-    )
+    try:
+        # Connect to MySQL
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=username,
+            passwd=password,
+            db=db_name,
+            charset="utf8"
+        )
 
-    # Create a cursor object
-    cursor = db.cursor()
+        # Create cursor and execute query
+        cur = db.cursor()
+        query = "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id ASC"
+        cur.execute(query.format(state_name))
 
-    # Execute the query with user input (safe from SQL injection)
-    cursor.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (state_name,))
+        # Fetch and print results with exact formatting
+        for row in cur.fetchall():
+            print("({}, '{}')".format(row[0], row[1]))
 
-    # Fetch all rows
-    rows = cursor.fetchall()
+    except MySQLdb.Error:
+        pass  # Silent fail as per requirements
+    finally:
+        if 'cur' in locals():
+            cur.close()
+        if 'db' in locals():
+            db.close()
 
-    # Print the results
-    for row in rows:
-        print(row)
-
-    # Close the cursor and connection
-    cursor.close()
-    db.close()
