@@ -45,4 +45,3 @@ if __name__ == "__main__":
             cur.close()
         if 'db' in locals():
             db.close()
-
