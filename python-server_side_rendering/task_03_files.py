@@ -46,7 +46,7 @@ def display_products():
     if source == 'json':
         products = read_json_products('products.json')
     elif source == 'csv':
-        products = read_json_products('products.csv')
+        products = read_csv_products('products.csv')  # Fixed this line
     else:
         error = "Wrong source. Please use 'json' or 'csv'."
     
