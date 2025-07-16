@@ -1,27 +1,69 @@
+from flask import Flask, render_template, request
+import json
+import csv
+import os
+
+app = Flask(__name__)
+
+def read_json_products(file_path):
+    """Read and parse products from JSON file"""
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+def read_csv_products(file_path):
+    """Read and parse products from CSV file"""
+    try:
+        products = []
+        with open(file_path, 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                # Convert id to int and price to float
+                row['id'] = int(row['id'])
+                row['price'] = float(row['price'])
+                products.append(row)
+        return products
+    except (FileNotFoundError, ValueError, KeyError):
+        return None
+
+def filter_product_by_id(products, product_id):
+    """Filter products by ID"""
+    for product in products:
+        if product['id'] == product_id:
+            return [product]
+    return None
+
 @app.route('/products')
 def display_products():
     source = request.args.get('source', '').lower()
     product_id = request.args.get('id', type=int)
     
-    # Read data based on source
+    error = None
+    products = None
+    
     if source == 'json':
-        products = read_json_products()
+        products = read_json_products('products.json')
     elif source == 'csv':
-        products = read_csv_products()
+        products = read_json_products('products.csv')
     else:
-        return render_template('product_display.html', 
-                             error="Wrong source. Please use 'json' or 'csv'")
+        error = "Wrong source. Please use 'json' or 'csv'."
     
-    if products is None:
-        return render_template('product_display.html', 
-                             error=f"Error reading {source} file")
+    if products is None and not error:
+        error = "Failed to read product data."
     
-    # Filter by ID if provided
-    if product_id is not None:
-        filtered_products = [p for p in products if p['id'] == product_id]
-        if not filtered_products:
-            return render_template('product_display.html',
-                                error="Product not found")  # Updated error message
-        products = filtered_products
+    if not error and product_id is not None:
+        filtered = filter_product_by_id(products, product_id)
+        if filtered:
+            products = filtered
+        else:
+            error = "Product not found."
     
-    return render_template('product_display.html', products=products)
+    return render_template('product_display.html', 
+                         products=products, 
+                         error=error, 
+                         source=source)
+
+if __name__ == '__main__':
+    app.run(debug=True)
